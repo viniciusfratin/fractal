@@ -34,11 +34,11 @@ GLuint vertexbuffer;
 GLuint colorbuffer;
 
 GLdouble* g_vertex_buffer_data;
-GLfloat* g_color_buffer_data;
+GLdouble* g_color_buffer_data;
 
 int init(long size)
 {
-// Initialise GLFW
+	// Initialise GLFW
 	if( !glfwInit() )
 	{
 		fprintf( stderr, "Failed to initialize GLFW\n" );
@@ -90,10 +90,10 @@ int init(long size)
 	programID = LoadShaders( "shaders/SimpleVertexShader.vertexshader", "shaders/SimpleFragmentShader.fragmentshader" );
 
 	g_vertex_buffer_data = (GLdouble*)malloc(3 * size * sizeof(GLdouble));
-	g_color_buffer_data = (GLfloat*)malloc(3 * size * sizeof(GLfloat));
+	g_color_buffer_data = (GLdouble*)malloc(3 * size * sizeof(GLdouble));
 }
 
-int draw(complex_number* points, double* colors, long size)
+int draw(complex_number* points, rgb_color* colors, long size)
 {
 	convert_points_to_ogl_array(points, g_vertex_buffer_data, size);
 	convert_colors_to_ogl_array(colors, g_color_buffer_data, size);
@@ -131,7 +131,7 @@ int draw(complex_number* points, double* colors, long size)
 		glVertexAttribPointer(
 		    	1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 		    	3,                                // size
-		    	GL_FLOAT,                         // type
+		    	GL_DOUBLE,                         // type
 		    	GL_FALSE,                         // normalized?
 		    	0,                                // stride
 		    	(void*)0                          // array buffer offset
@@ -209,7 +209,7 @@ int convert_points_to_ogl_array(complex_number* points, GLdouble* ogl_array, lon
 	return RET_SUCCESS;
 }
 
-int convert_colors_to_ogl_array(double* colors, GLfloat* ogl_array, long size)
+int convert_colors_to_ogl_array(rgb_color* colors, GLdouble* ogl_array, long size)
 {
 	if(colors == NULL || ogl_array == NULL)
 	{
@@ -219,9 +219,9 @@ int convert_colors_to_ogl_array(double* colors, GLfloat* ogl_array, long size)
 	long i;
 	for(i = 0; i < size; i++)
 	{
-		ogl_array[3*i] = (float)colors[3*i];
-		ogl_array[3*i + 1] = (float)colors[3*i + 1];
-		ogl_array[3*i + 2] = (float)colors[3*i + 2];
+		ogl_array[3*i] = colors[i].r;
+		ogl_array[3*i + 1] = colors[i].g;
+		ogl_array[3*i + 2] = colors[i].b;
 		//printf("%lf\n", ogl_array[3*i]);
 	}
 

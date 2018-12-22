@@ -1,4 +1,4 @@
 make
 cd bin
-./mandelbrot
+./fractal 1
 cd ..

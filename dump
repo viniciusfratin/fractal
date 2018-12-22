@@ -1,7 +1,0 @@
-g++ -g src/complex.cpp src/draw.cpp include/common/shader.cpp include/common/common.cpp src/mandelbrot.cpp src/main.cpp -Itmp -Iinclude -o bin/mandelbrot -lm -lGLEW -lglfw -lGL
-Compiling shader : shaders/SimpleVertexShader.vertexshader
-
-Compiling shader : shaders/SimpleFragmentShader.fragmentshader
-
-Linking program
-

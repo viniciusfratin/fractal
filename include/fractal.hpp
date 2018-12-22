@@ -1,0 +1,10 @@
+#ifndef FRACTAL_HPP_
+#define FRACTAL_HPP_
+
+#include <complex.hpp>
+
+#define MAX_ITERATIONS 500
+#define ESCAPE_RADIUS 20.0
+#define ESCAPE_RADIUS_SQUARED ESCAPE_RADIUS*ESCAPE_RADIUS
+
+#endif
